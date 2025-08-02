@@ -1,0 +1,44 @@
+<!-- templates/read.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Read Essays</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center text-bg-success px-4 py-2">
+            <span class="fs-1 mx-auto">Essay Writing Web App</span>
+            <!-- <button class="btn btn-primary ms-auto"></button> -->
+            <a href="/" class="btn btn-primary ms-auto">Write Mode</a>
+        </div>
+        
+        <h1 class="text-center mb-4">Saved Essays</h1>
+        <div class="container">
+            <div class="row">
+                {% for entry in all_data %}
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <strong>{{ entry.title }}</strong>
+                                <span class="text-muted float-end">{{ entry.date.strftime('%d/%m/%Y %H:%M') }}</span>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text overflow-auto" style="height: 250px;">{{ entry.content }}</p>
+                            </div>
+                            <div class="card-footer text-muted">
+                                <a href="/update/{{ entry.sno }}" class="btn btn-warning">Edit</a>
+                                <a href="/delete/{{ entry.sno }}" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+
+                {% else %}
+                    <div class="alert alert-warning text-center">No essays found.</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
